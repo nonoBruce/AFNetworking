@@ -146,7 +146,13 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
     } else if ([value isKindOfClass:[NSArray class]]) {
         NSArray *array = value;
         for (id nestedValue in array) {
-            [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[]", key], nestedValue)];
+//            [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[]", key], nestedValue)];
+            [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[%lu]", key,(unsigned long)[array indexOfObject:nestedValue]], nestedValue)];
+
+            //            作者：爱心随2012
+            //            链接：https://www.jianshu.com/p/130daa0c2fe7
+            //            来源：简书
+            //            著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
         }
     } else if ([value isKindOfClass:[NSSet class]]) {
         NSSet *set = value;
